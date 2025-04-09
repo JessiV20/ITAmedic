@@ -1,0 +1,64 @@
+<div class="login-container">
+  <h2>Crear cuenta</h2>
+  <p>¡Bienvenido a bordo con nosotros!</p>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" formControlName="nombre" placeholder="Ingresa tu nombre" />
+      </div>
+
+      <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <input id="sexo" formControlName="sexo" placeholder="Ingresa tu sexo" />
+      </div>
+
+      <div class="form-group">
+          <label for="peso">Peso</label>
+          <input id="peso" formControlName="peso" placeholder="Ingresa tu peso" />
+      </div>
+
+      <div class="form-group">
+          <label for="correo">Correo electrónico</label>
+          <input id="correo" type="email" formControlName="correo" placeholder="Ingresa tu correo electrónico" />
+      </div>
+
+      <div class="form-group">
+          <label for="contrasena">Contraseña</label>
+          <input id="contrasena" type="password" formControlName="contrasena" placeholder="Ingresa tu contraseña" />
+      </div>
+
+      <div class="form-group">
+          <label for="edad">Edad</label>
+          <input id="edad" formControlName="edad" placeholder="Ingresa tu edad" />
+      </div>
+
+      <div class="form-group">
+          <label for="talla">Atura</label>
+          <input id="altura" formControlName="altura" placeholder="Ingresa tu talla" />
+      </div>
+
+  
+      <div class="form-group">
+          <label for="alergias">Alergias</label>
+          <input id="alergias" formControlName="alergias" placeholder="Ingresa tus alergias" />
+      </div>
+
+      <div class="form-group">
+          <label for="tipo_sangre">Tipo de sangre</label>
+          <input id="tipo_sangre" formControlName="tipo_sangre" placeholder="Ingresa tu tipo de sangre" />
+      </div>
+
+      <div class="form-group">
+          <label for="enfermedad">Enfermedades</label>
+          <input id="enfermedad" formControlName="enfermedad" placeholder="Ingresa tus enfermedades" />
+      </div>
+
+      <div class="form-group">
+          <label for="direccion">Dirección</label>
+          <input id="direccion" formControlName="direccion" placeholder="Ingresa tu dirección" />
+      </div>
+
+      <button type="submit" class="btn-login">CREAR</button>
+  </form>
+</div>
