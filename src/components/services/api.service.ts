@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError, tap, Observable, throwError } from 'rxjs';
 import  { Router } from '@angular/router'
-
+import { Admin, Role } from '../models/admin.model'
 @Injectable({
   providedIn: 'root',
 })
@@ -132,4 +132,21 @@ export class ApiService {
       })
     );
   }
+
+
+  getAdmins(): Observable<Admin[]> {
+    const headers = new HttpHeaders().set('Content-type', 'application/json');
+      return this.http.get<Admin[]>(this.api+'admins/admins');
+    }
+  
+    getRoles(): Observable<Role[]> {
+      const headers = new HttpHeaders().set('Content-type', 'application/json');
+      return this.http.get<Role[]>(this.api+'admins/roles');
+    }
+  
+    updateRole(adminId: number, roleId: number): Observable<any> {
+      const headers = new HttpHeaders().set('Content-type', 'application/json');
+      const body = { role_id: roleId };
+      return this.http.put(this.api+`admins/admins/${adminId}/role`, body,{ headers });
+    }
 }

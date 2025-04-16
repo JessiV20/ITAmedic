@@ -1,0 +1,96 @@
+.admin-panel-container {
+    max-width: 960px;
+    margin: 3rem auto;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    font-family: "Segoe UI", sans-serif;
+  }
+  
+  .panel-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #2b3e50;
+  }
+  
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .admin-table thead {
+    background-color: #f4f6f8;
+  }
+  
+  .admin-table th,
+  .admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .role-select {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #fefefe;
+    transition: border 0.3s ease;
+  }
+  
+  .role-select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .update-btn {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .update-btn:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .btn-update {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-update:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-delete {
+    background-color: #dc3545;
+    color: white;
+    margin-left: 0.5rem;
+  }
+  
+  .btn-delete:hover {
+    background-color: #b02a37;
+  }
+  
+  .btn:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  
