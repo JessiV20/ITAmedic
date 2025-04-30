@@ -70,3 +70,8 @@
     color: #555;
   }
   
+  .text-danger {
+    font-size: 12px;
+    margin-top: 5px;
+    color: red;
+  }	

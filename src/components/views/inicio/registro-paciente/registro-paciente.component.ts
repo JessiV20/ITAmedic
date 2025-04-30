@@ -22,14 +22,14 @@ export class RegistroPacienteComponent {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       sexo: ['', Validators.required],
-      peso: ['', Validators.required],
+      peso: [''],
       correo: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
       edad: ['', Validators.required],
-      altura: ['', Validators.required],
-      alergias: ['', Validators.required],
-      tipo_sangre: ['', Validators.required],
-      enfermedad: ['', Validators.required],
+      altura: [''], 
+      alergias: [''],
+      tipo_sangre: [''], 
+      enfermedad: [''], 
       direccion: ['', Validators.required]
     });
   }
@@ -62,6 +62,7 @@ export class RegistroPacienteComponent {
       });
     } else {
       console.log('Formulario inválido');
+      this.registroForm.markAllAsTouched();
     }
   }
 }

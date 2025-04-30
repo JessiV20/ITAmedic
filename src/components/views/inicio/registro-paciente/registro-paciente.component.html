@@ -3,9 +3,12 @@
   <p>¡Bienvenido a bordo con nosotros!</p>
 
   <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="login-form">
-      <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input id="nombre" formControlName="nombre" placeholder="Ingresa tu nombre" />
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre completo">
+            <div *ngIf="registroForm.get('nombre')?.touched && registroForm.get('nombre')?.invalid" class="text-danger">
+            El nombre es obligatorio.
+            </div>
       </div>
 
       <div class="form-group">
@@ -19,13 +22,35 @@
       </div>
 
       <div class="form-group">
-          <label for="correo">Correo electrónico</label>
-          <input id="correo" type="email" formControlName="correo" placeholder="Ingresa tu correo electrónico" />
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" class="form-control" formControlName="correo" placeholder="Correo electrónico">
+        <div *ngIf="registroForm.get('correo')?.touched && registroForm.get('correo')?.invalid" class="text-danger">
+          <div *ngIf="registroForm.get('correo')?.errors?.['required']">
+            El correo es obligatorio.
+          </div>
+          <div *ngIf="registroForm.get('correo')?.errors?.['email']">
+            El formato del correo no es válido.
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
-          <label for="contrasena">Contraseña</label>
-          <input id="contrasena" type="password" formControlName="contrasena" placeholder="Ingresa tu contraseña" />
+        <label for="contrasena">Contraseña</label>
+        <input
+          type="password"
+          id="contrasena"
+          class="form-control"
+          formControlName="contrasena"
+          placeholder="Ingresa tu contraseña"
+        >
+        <div *ngIf="registroForm.get('contrasena')?.touched && registroForm.get('contrasena')?.invalid" class="text-danger">
+          <div *ngIf="registroForm.get('contrasena')?.errors?.['required']">
+            La contraseña es obligatoria.
+          </div>
+          <div *ngIf="registroForm.get('contrasena')?.errors?.['minlength']">
+            La contraseña debe tener al menos 6 caracteres.
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -34,7 +59,7 @@
       </div>
 
       <div class="form-group">
-          <label for="talla">Atura</label>
+          <label for="talla">Altura</label>
           <input id="altura" formControlName="altura" placeholder="Ingresa tu talla" />
       </div>
 
