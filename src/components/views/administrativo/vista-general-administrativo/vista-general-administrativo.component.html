@@ -1,1 +1,27 @@
-<p>vista-general-administrativo works!</p>
+<div class="admin-panel-container">
+    <h2 class="panel-title">Administrative Panel</h2>
+    <table class="admin-table">
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Current Role</th>
+        <th>Change Role</th>
+        <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let admin of admins">
+        <td>{{ admin.username }}</td>
+        <td>{{ admin.role }}</td>
+        <td>
+            <select [(ngModel)]="admin.role">
+            <option *ngFor="let role of roles" [value]="role.rol">{{ role.rol }}</option>
+            </select>
+        </td>
+        <td>
+            <button  class="btn btn-update" (click)="onUpdateRole(admin)">Update</button>
+        </td>
+        </tr>
+    </tbody>
+    </table>
+</div>
