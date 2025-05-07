@@ -1,1 +1,37 @@
-<p>historial-cita works!</p>
+<div class="table-container">
+    <h2 class="table-title">Historial de Citas</h2>
+  
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="idcitas">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Folio Cita </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.idcitas }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombrePaciente">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Paciente </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nombrePaciente }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombreMedico">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Médico </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.nombreMedico }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.fecha | date: 'dd/MM/yyyy' }} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="estatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.estatus }} </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator>
+  </div>
+  

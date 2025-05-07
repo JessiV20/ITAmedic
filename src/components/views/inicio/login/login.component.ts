@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  tipoUsuario: string | null = null;
+  tipoUsuario = 'paciente';
   usuarioMedico: any = {}; 
   usuarioLogueado: any = {}; 
   constructor(
@@ -29,8 +29,7 @@ export class LoginComponent {
   ) {}
 
   ngOnInit() {
-    this.tipoUsuario = this.route.snapshot.paramMap.get('tipo');
-    console.log('Tipo de usuario:', this.tipoUsuario);
+
     this.loginForm = this.fb.group({
       correo: ['', Validators.required],
       contrasena: ['', Validators.required],

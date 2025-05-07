@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { RegistroPacienteComponent } from '../components/views/inicio/registro-paciente/registro-paciente.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'botones/iniciosesion', pathMatch: 'full'},
+    {path: '', redirectTo: 'login/iniciosesion', pathMatch: 'full'},
     {  
         path: '',
 
@@ -24,11 +24,10 @@ export const routes: Routes = [
             },
         ]
     },
-    { path: 'login/iniciosesion/:tipo', component: LoginComponent },
     
     { path: 'registro/paciente', component: RegistroPacienteComponent },
     {
-        path: 'botones/iniciosesion',  component: InicioBotonesComponent, data: { title: "hola" }
+        path: 'login/iniciosesion',  component: LoginComponent, data: { title: "hola" }
     },
-    {path: '**', component: InicioBotonesComponent}
+    {path: '**', component: LoginComponent}
 ];
