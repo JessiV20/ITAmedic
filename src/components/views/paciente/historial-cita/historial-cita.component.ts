@@ -3,16 +3,19 @@ import { ApiService } from '../../../services/api.service';
 import { ActivatedRoute } from '@angular/router'; 
 import { MatTableDataSource } from '@angular/material/table';
 import { CompartidosModule } from '../../../modules/compartidos.module';
+import { ViewChild, AfterViewInit } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-historial-cita',
-  imports: [CompartidosModule],
+  imports: [CompartidosModule, MatPaginator],
   templateUrl: './historial-cita.component.html',
   styleUrl: './historial-cita.component.css'
 })
 export class HistorialCitaComponent {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   idPaciente: string | null = null;
-  displayedColumns: string[] = ['idcitas', 'nombrePaciente', 'nombreMedico', 'fecha', 'estatus'];
+  displayedColumns: string[] = ['idcitas', 'nombrePaciente', 'nombreMedico', 'fecha','motivo', 'estatus', 'acciones'];
   dataSource = new MatTableDataSource<any>(); 
   constructor(private api: ApiService, private route: ActivatedRoute) { }
   ngOnInit() {
@@ -20,9 +23,9 @@ export class HistorialCitaComponent {
     console.log('ID del paciente:', this.idPaciente);
     this.obtenerHistorialCitas();
   }
-  ngafterViewInit() {
-    this.obtenerHistorialCitas();
-  }
+ngAfterViewInit() {
+  this.dataSource.paginator = this.paginator;
+}
   obtenerHistorialCitas() {
     this.api.consultaDatosPost('paciente/obtenerHistorialCitas', this.idPaciente ).subscribe({
       next: (response) => {
@@ -35,4 +38,11 @@ export class HistorialCitaComponent {
       }
     });   
 }
+CancelarCita(id: number) {
+}
+
+openDialog(id: number) {
+}
+detallesCita(id: number) {}
+motovoCancelacion(id: number) {}
 }

@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 })
 export class GenerarCitaComponent {
   citaForm: FormGroup;
-
+ValidarErrorMedico: boolean = false;
   constructor(private fb: FormBuilder, private http: HttpClient, private api: ApiService, private router: Router) {
     this.citaForm = this.fb.group({
       idpaciente: ['', Validators.required],
@@ -30,7 +30,9 @@ export class GenerarCitaComponent {
       const cita = this.citaForm.value;
 
      this.api.insertarDatos('paciente/insertarCita', cita).subscribe({
+     
         next: (response) => {
+          this.ValidarErrorMedico== false;
            Swal.fire({
                       title: "Cita Agendada!",
                       icon: "success",
@@ -44,11 +46,25 @@ export class GenerarCitaComponent {
           });
         },
         error: (error) => {
-           Swal.fire({
-                      icon: "error",
-                      title: "Oops...",
-                      text: "Error al registrar el paciente!"
-                    });
+          this.ValidarErrorMedico=error.includes('405')
+   
+          console.log('Código de estado:', this.ValidarErrorMedico); // ← muestra el código de estado
+          console.error('Error al registrar la cita:', error); // ← muestra todo, incluyendo `.status`
+          console.log('Código de estado:', error.includes('405'));  
+          if (this.ValidarErrorMedico=== true) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "No hay médicos disponibles para la fecha seleccionada!"
+            });
+          }else{
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Error al registrar la cita!"
+            });
+          }
+
         }
       });
     }
@@ -62,6 +78,7 @@ export class GenerarCitaComponent {
   }
   ngOnInit() {
     this.obtenerIdPaciente();
+    this.ValidarErrorMedico== false;
 
   }
   verHistorialCitas() {

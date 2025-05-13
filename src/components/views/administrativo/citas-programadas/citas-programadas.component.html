@@ -1,1 +1,71 @@
-<p>citas-programadas works!</p>
+<!-- citas-programadas.component.html -->
+<div class="container">
+    <h2>Citas Programadas</h2>
+  
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+  
+      <!-- ID Cita -->
+      <ng-container matColumnDef="idcitas">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.idcitas }} </td>
+      </ng-container>
+  
+      <!-- Nombre del Paciente -->
+      <ng-container matColumnDef="nombrePaciente">
+        <th mat-header-cell *matHeaderCellDef> Paciente </th>
+        <td mat-cell *matCellDef="let element"> {{ element.nombrePaciente }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nombreMedico">
+        <th mat-header-cell *matHeaderCellDef> Médico </th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="element.nombreMedico; else selectMedico">
+            {{ element.nombreMedico }}
+          </ng-container>
+          <ng-template #selectMedico>
+            <mat-form-field appearance="fill">
+              <mat-select [(value)]="element.idmedico" placeholder="Seleccionar médico"  (selectionChange)="guardarDatosMedico(element)">
+                <mat-option *ngFor="let medico of listaMedicos" [value]="medico.idmedico">
+                  {{ medico.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </ng-template>
+            </ng-container>
+  
+      <!-- Fecha -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+        <td mat-cell *matCellDef="let element"> {{ element.fecha }} </td>
+      </ng-container>
+  
+      <!-- Motivo -->
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef> Motivo </th>
+        <td mat-cell *matCellDef="let element"> {{ element.motivo }} </td>
+      </ng-container>
+  
+      <!-- Estatus -->
+      <ng-container matColumnDef="estatus">
+        <th mat-header-cell *matHeaderCellDef> Estatus </th>
+        <td mat-cell *matCellDef="let element"> {{ element.estatus }} </td>
+      </ng-container>
+  
+      <!-- Acciones -->
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button color="primary">Ver</button>
+          <button mat-button color="accent">Editar</button>
+        </td>
+      </ng-container>
+  
+      <!-- Encabezado y Celdas -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+    </table>
+
+    <button class="primary" (click)="guardarCambios()">Guardar Cambios</button>
+  </div>
+  

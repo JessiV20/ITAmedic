@@ -35,4 +35,51 @@
   mat-paginator {
     margin-top: 16px;
   }
-  
+
+  .elibtn{
+    align-items: center;
+    padding: 5px 10px;
+    background-color: rgba(255, 0, 0, 0.142); 
+    border: 1px solid rgb(255, 0, 0);
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+  .editbtn{
+    align-items: center;
+    padding: 5px 10px;
+    background-color: rgba(18, 129, 185, 0.447); 
+    border: 1px solid rgb(21, 130, 185);
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+  .colorBlue{
+    color:rgb(55, 130, 168);
+}
+.Grbtn{
+    margin-left: 20%;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #82f06c3b; 
+    border: 1px solid #82f06cd6;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.Cvbtn{
+  margin-left: 20%;
+  align-items: center;
+  padding: 5px 20px;
+  background-color: #f9d44058; 
+  border: 1px solid #fad028;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s; 
+  justify-content: center;
+}
