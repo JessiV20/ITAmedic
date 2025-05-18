@@ -1,0 +1,163 @@
+<div class="historial-medico-container">
+  <!-- Header Institucional -->
+  <header class="header-institucional">
+    <div class="logo-salud">
+      <mat-icon>medical_services</mat-icon>
+      <h1>Gestión de Citas Médicas</h1>
+    </div>
+    <button mat-stroked-button color="warn" (click)="logout()">
+      <mat-icon>logout</mat-icon> Cerrar Sesión
+    </button>
+  </header>
+
+  <!-- Filtros y estadísticas -->
+  <mat-card class="card-filtros">
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <mat-form-field appearance="outline">
+            <mat-label>Filtrar por estatus</mat-label>
+            <mat-select [(ngModel)]="selectedEstado" (selectionChange)="filterCitas()">
+              <mat-option *ngFor="let estado of estados" [value]="estado">
+                {{ estado | titlecase }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-8 text-end">
+          <span class="badge bg-secondary me-2">Total: {{totalCitas}}</span>
+          <span class="badge bg-warning text-dark me-2">Espera: {{citasEspera}}</span>
+          <span class="badge bg-success me-2">Atendidas: {{citasAtendidas}}</span>
+          <span class="badge bg-danger">Canceladas: {{citasCanceladas}}</span>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="spinner-container">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p class="mt-2">Cargando citas...</p>
+  </div>
+
+  <!-- Tabla de citas -->
+  <div *ngIf="!loading">
+    <mat-card class="tabla-citas-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Motivo</th>
+            <th>Estatus</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of filteredCitas">
+            <td class="fw-bold">#{{ cita.idcita }}</td>
+            <td>{{ cita.paciente_nombre }}</td>
+            <td>{{ cita.fecha | date:'dd/MM/yyyy' }}</td>
+            <td>{{ cita.hora }}</td>
+            <td>{{ cita.motivo }}</td>
+            <td>
+              <span class="estado-badge" [ngClass]="{
+                'estado-espera': cita.estatus === 'espera',
+                'estado-atendida': cita.estatus === 'atendida',
+                'estado-cancelada': cita.estatus === 'cancelada'
+              }">
+                {{ cita.estatus | titlecase }}
+              </span>
+            </td>
+            <td>
+              <div class="acciones-cita">
+                <button mat-icon-button color="primary" (click)="editarCita(cita)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <!-- Mejora los botones de estado -->
+<button *ngIf="cita.estatus === 'espera'" 
+        mat-raised-button 
+        color="primary" 
+        (click)="cambiarEstadoCita(cita.idcitas, 'atendida')"
+        class="cambiarEstadoCita(cita.idcita, 'atendida')">
+  <mat-icon>check_circle</mat-icon> 
+  <span class="button-text">Atender</span>
+</button>
+
+<button *ngIf="cita.estatus === 'espera'" 
+        mat-raised-button 
+        color="warn" 
+        (click)="cambiarEstadoCita(cita.idcitas, 'cancelada')"
+        class="action-button">
+  <mat-icon>cancel</mat-icon>
+  <span class="button-text">Cancelar</span>
+</button>
+                <span *ngIf="cita.estatus !== 'espera' && !modoEdicion" class="text-muted">-</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card>
+
+    <!-- Formulario de edición -->
+    <mat-card *ngIf="modoEdicion" class="formulario-edicion">
+      <h2>Editar Datos del Paciente</h2>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Paciente</mat-label>
+        <input matInput [(ngModel)]="citaEditando.paciente_nombre">
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Edad</mat-label>
+          <input matInput type="number" [(ngModel)]="citaEditando.paciente_edad">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Sexo</mat-label>
+          <mat-select [(ngModel)]="citaEditando.paciente_sexo">
+            <mat-option value="Masculino">Masculino</mat-option>
+            <mat-option value="Femenino">Femenino</mat-option>
+            <mat-option value="Otro">Otro</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Peso (kg)</mat-label>
+          <input matInput type="number" [(ngModel)]="citaEditando.paciente_peso">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="half-width">
+          <mat-label>Altura (cm)</mat-label>
+          <input matInput type="number" [(ngModel)]="citaEditando.paciente_altura">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Motivo de consulta</mat-label>
+        <textarea matInput [(ngModel)]="citaEditando.motivo" rows="3"></textarea>
+      </mat-form-field>
+
+      <div class="acciones-formulario">
+        <button mat-raised-button color="primary" (click)="guardarCambios()">
+          <mat-icon>save</mat-icon> Guardar Cambios
+        </button>
+        <button mat-stroked-button color="warn" (click)="cancelarEdicion()">
+          <mat-icon>cancel</mat-icon> Cancelar
+        </button>
+      </div>
+    </mat-card>
+
+    <!-- Mensaje cuando no hay citas -->
+    <mat-card *ngIf="filteredCitas.length === 0 && !loading && !modoEdicion" class="no-citas-message">
+      <mat-icon>info</mat-icon>
+      <p>No se encontraron citas {{selectedEstado !== 'todas' ? 'con estatus ' + (selectedEstado | titlecase) : ''}}</p>
+    </mat-card>
+  </div>
+</div>
