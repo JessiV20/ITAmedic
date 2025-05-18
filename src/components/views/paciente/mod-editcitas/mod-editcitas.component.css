@@ -1,0 +1,46 @@
+:host {
+  display: block;
+  padding: 100px;
+  max-width: 50%;
+  align-items: center;
+  text-align: center;
+  margin-left: 18%;
+}
+
+h2[mat-dialog-title] {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #3f51b5;
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+button[mat-button] {
+  font-weight: 500;
+}
+
+button[mat-flat-button] {
+  background-color: #3f51b5;
+  color: white;
+}
+
+button[mat-flat-button]:hover {
+  background-color: #303f9f;
+}

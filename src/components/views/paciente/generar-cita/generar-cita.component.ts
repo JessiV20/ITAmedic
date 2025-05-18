@@ -48,8 +48,8 @@ ValidarErrorMedico: boolean = false;
         error: (error) => {
           this.ValidarErrorMedico=error.includes('405')
    
-          console.log('Código de estado:', this.ValidarErrorMedico); // ← muestra el código de estado
-          console.error('Error al registrar la cita:', error); // ← muestra todo, incluyendo `.status`
+          console.log('Código de estado:', this.ValidarErrorMedico);
+          console.error('Error al registrar la cita:', error); 
           console.log('Código de estado:', error.includes('405'));  
           if (this.ValidarErrorMedico=== true) {
             Swal.fire({

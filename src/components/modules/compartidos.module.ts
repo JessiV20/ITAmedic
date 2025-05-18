@@ -22,7 +22,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { RouterModule } from '@angular/router';
-
+import{ MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -31,14 +31,14 @@ import { RouterModule } from '@angular/router';
     MatTableModule, MatDatepickerModule, MatTabsModule, MatExpansionModule, MatMenuModule,
     MatPaginatorModule, MatProgressSpinnerModule, FormsModule, MatSlideToggleModule, MatAutocompleteModule,
     ReactiveFormsModule, MatTooltipModule, MatCheckboxModule, MatDialogModule,
-    MatGridListModule,
+    MatGridListModule, MatNativeDateModule
   ],
   exports:[
     CommonModule, MatFormFieldModule, MatButtonModule, MatInputModule,
     MatOptionModule, MatSelectModule, MatTableModule, MatDatepickerModule,
     MatTabsModule, MatExpansionModule, MatMenuModule, MatPaginatorModule,
     MatProgressSpinnerModule,  MatCardModule, FormsModule, MatSlideToggleModule, MatAutocompleteModule,
-    ReactiveFormsModule, MatTooltipModule, MatCheckboxModule, MatDialogModule, MatGridListModule,
+    ReactiveFormsModule, MatTooltipModule, MatCheckboxModule, MatDialogModule, MatGridListModule, MatNativeDateModule
   ],
   providers:[
     { provide: MatPaginatorIntl }
